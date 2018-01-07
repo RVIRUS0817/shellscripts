@@ -1,7 +1,7 @@
 #!/bin/bash
 
-hoge1=/hoge/test.txt.`date "+%Y%m%d-%H%M"`
-hogerm=/hoge/test.txt.`date -d '1 hours ago' +%Y%m%d-%H%M`
+HOGE1=/hoge/test.txt.`date "+%Y%m%d-%H%M"`
+HOGERM=/hoge/test.txt.`date -d '1 hours ago' +%Y%m%d-%H%M`
 
 echo `date "+%Y-%m-%d %T"`
 ssh -q adachin@lsyncd sudo -u adachin touch $hoge

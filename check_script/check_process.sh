@@ -2,10 +2,10 @@
 
 #check zabbix-server
 
-processName01=zabbix
-processName02=nagios
-processName03=mysqld
-processName04=httpd
+PROCESSNAME01=zabbix
+PROCESSNAME02=nagios
+PROCESSNAME03=mysqld
+PROCESSNAME04=httpd
 
 ##zabbix##
 
