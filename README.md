@@ -20,3 +20,7 @@ rsync,etc..
 ## csr-key_script  
 
 https://blog.adachin.me/wordpress/archives/2156  
+
+## vuls_script  
+
+https://blog.adachin.me/wordpress/archives/6645  
