@@ -1,10 +1,10 @@
 #!/bin/bash
 
 PROCCESS=php
-ALIVE=`pgrep "$PROCCESS" | wc -l`
+ALIVE=`pgrep -f "$PROCCESS" | wc -l`
 
 echo "===check proccess php oil===" 
-pgrep php
+pgrep -f php
 
 echo "===check php oil ===" 
   if [ $ALIVE = 3 ]; then
@@ -17,4 +17,4 @@ echo "===check php oil ==="
 
 echo "===status check, php oil /var/tmp===" 
   ls -l /var/tmp
-  pgrep php
+  pgrep -f php
