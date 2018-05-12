@@ -23,6 +23,10 @@ rsync,etc..
 
 https://blog.adachin.me/wordpress/archives/2156  
 
+## digdag_script    
+
+https://blog.adachin.me/archives/8334
+
 ## vuls_script  
 
 https://blog.adachin.me/wordpress/archives/6645  
