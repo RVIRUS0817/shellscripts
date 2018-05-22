@@ -1,0 +1,66 @@
+#!/bin/bash
+#chkconfig: 2345 85 15
+#descpriction: node
+#OS CentOS6
+
+# source function library
+. /etc/rc.d/init.d/functions
+
+RETVAL=0
+NODEPATH=/home/adachin/node
+
+start() {
+        echo -n $"Starting node: "
+        cd $NODEPATH && export NODE_PATH=$NODEPATH/src; /usr/bin/node $NODEPATH/tmpl.js >/dev/null 2>&1 &
+        RETVAL=$?
+        if [ $RETVAL == 0 ]; then
+          success
+        else
+          failure
+        fi
+        echo
+}
+
+stop() {
+        echo -n $"Stopping node: "
+        /usr/bin/pkill node
+        RETVAL=$?
+        if [ $RETVAL == 0 ]; then
+          success
+        else
+          failure
+        fi
+        echo
+}
+
+status() {
+        if /usr/bin/pgrep node > /dev/null
+        then
+          echo -n $"node is running: "
+        else
+          echo -n $"node is not running: "
+        fi
+        RETVAL=$?
+        echo
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  status)
+        status
+        ;;
+  restart)
+        stop
+        start
+        ;;
+  *)
+        echo -e $"Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $RETVAL

@@ -27,6 +27,10 @@ https://blog.adachin.me/wordpress/archives/2156
 
 https://blog.adachin.me/archives/8334
 
+## init.d  
+
+system v,init scripts  
+
 ## vuls_script  
 
 https://blog.adachin.me/wordpress/archives/6645  
