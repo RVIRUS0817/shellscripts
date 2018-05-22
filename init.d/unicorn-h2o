@@ -1,0 +1,97 @@
+!/bin/sh
+# chkconfig: 2345 90 10
+# description: unicorn system status
+
+NAME="Unicorn"
+ENV=production
+
+ROOT_DIR="/usr/share/h2o/redmine"
+
+PID="/tmp/unicorn.pid"
+CONF="/usr/share/h2o/redmine/config/unicorn.rb"
+CMD="/usr/local/rbenv/shims/bundle exec unicorn_rails -c ${CONF} -E ${ENV} -D"
+
+start()
+{
+  if [ -e $PID ]; then
+    echo "$NAME already started"
+    exit 1
+  fi
+  echo "start $NAME"
+  cd $ROOT_DIR
+  $CMD
+}
+
+stop()
+{
+  if [ ! -e $PID ]; then
+    echo "$NAME not started"
+    exit 1
+  fi
+  echo "stop $NAME"
+  kill -QUIT `cat ${PID}`
+  rm -f $PID
+}
+
+force_stop()
+{
+  if [ ! -e $PID ]; then
+    echo "$NAME not started"
+    exit 1
+  fi
+  echo "stop $NAME"
+  kill -INT `cat ${PID}`
+  rm -f $PID
+}
+
+reload()
+{
+  if [ ! -e $PID ]; then
+    echo "$NAME not started"
+    start
+    exit 0
+  fi
+  echo "reload $NAME"
+  kill -HUP `cat ${PID}`
+}
+
+restart()
+{
+    stop
+    start
+}
+
+status() {
+        if pgrep unicorn > /dev/null
+        then
+          echo -n $"unicorn is running: "
+        else
+          echo -n $"unicorn is not running: "
+        fi
+        RETVAL=$?
+        echo
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  force-stop)
+    force_stop
+    ;;
+  reload)
+    reload
+    ;;
+  restart)
+    restart
+    ;;
+  status)
+    status
+    ;;
+  *)
+    echo "Syntax Error: release [start|stop|force-stop|reload|restart|status]"
+    ;;
+esac

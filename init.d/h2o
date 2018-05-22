@@ -1,0 +1,79 @@
+#!/bin/bash
+#chkconfig: 2345 85 15
+#descpriction: h2o Web Server
+
+# source function library
+. /etc/rc.d/init.d/functions
+
+RETVAL=0
+SERVICE_NAME=`basename $0`
+
+start() {
+        echo -n $"Starting $SERVICE_NAME: "
+        /usr/sbin/h2o -m daemon -c /etc/h2o/h2o.conf
+        RETVAL=$?
+        if [ $RETVAL == 0 ]; then
+          success
+        else
+          failure
+        fi
+        echo
+}
+
+stop() {
+        echo -n $"Stopping $SERVICE_NAME: "
+        kill -TERM `cat /var/run/h2o/h2o.pid`
+        RETVAL=$?
+        if [ $RETVAL == 0 ]; then
+          success
+        else
+          failure
+        fi
+        echo
+}
+
+reload() {
+        echo -n $"Graceful $SERVICE_NAME: "
+        kill -HUP `cat /var/run/h2o/h2o.pid`
+        RETVAL=$?
+        if [ $RETVAL == 0 ]; then
+          success
+        else
+          failure
+        fi
+        echo
+}
+
+configtest() {
+    /usr/sbin/h2o -t -c /etc/h2o/h2o.conf
+}
+
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  status)
+        status -p /var/run/h2o/h2o.pid
+        RETVAL=$?
+        ;;
+  reload|graceful)
+        reload
+        ;;
+  configtest)
+        configtest
+        RETVAL=$?
+        ;;
+  restart)
+        stop
+        start
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop}"
+        exit 1
+esac
+
+exit $RETVAL
