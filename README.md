@@ -29,7 +29,7 @@ https://blog.adachin.me/archives/8334
 
 ## init.d  
 
-system v,init scripts  
+sysvinit scripts  
 
 ## vuls_script  
 
