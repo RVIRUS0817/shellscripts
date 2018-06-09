@@ -1,4 +1,5 @@
 #!/bin/bash
+#### Past log S3 to BigQuery #### 
 
 set -e
 
