@@ -43,7 +43,7 @@ echo "_export:
 _error:
   sh>: export \$(cat config/env | xargs) && /digdag/xxxxxxxxxxx.sh \"[\${session_time}][\${session_id}] DigDag Fail ${FILENAME}\"
 +load:
-  sh>: export \$(cat config/env | xargs) && /usr/local/bin/embulk run embulk/${FILENAME}.yml.liquid" | sed -e "s/VAR1/${DATE2}/g" -e "s/VAR2/${DATE1}/g" > ${FILENAME}.${DATE1}.dig
+  sh>: export \$(cat config/env | xargs) && /usr/local/bin/embulk run -b \$EMBULK_BUNDLE_PATH embulk/${FILENAME}.yml.liquid" | sed -e "s/VAR1/${DATE2}/g" -e "s/VAR2/${DATE1}/g" > ${FILENAME}.${DATE1}.dig
 
 DIGDAGFILE=${FILENAME}.${DATE1}.dig
 
