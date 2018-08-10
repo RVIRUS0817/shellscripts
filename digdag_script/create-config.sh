@@ -22,7 +22,6 @@ COLUMN=$2
 cat << EOD > ../bigquery/$TABLENAME.dig
 _error:
   sh>: export \$(cat config/env | xargs) && /opt/redash-ops/digdag/post_chatwork.sh "[\${session_time}][\${session_id}] DigDag Fail $TABLENAME"
-
 +$TABLENAME:
   sh>: export \$(cat config/env | xargs) && /usr/local/bin/embulk run -b \$EMBULK_BUNDLE_PATH embulk/$TABLENAME.yml.liquid
 EOD
@@ -33,9 +32,9 @@ cat << EOD > ../bigquery/embulk/$TABLENAME.yml.liquid
 in:
   type: mysql
   {% if env.EMBULK_ENV == 'production' %}
-    {% include 'db/prod_ljp' %}
+    {% include 'db/ljp' %}
   {% else %}
-    {% include 'db/pre_ljp' %}
+    {% include 'db/ljp' %}
   {% endif %}
   query: |
     SELECT
@@ -54,7 +53,7 @@ out:
   {% endif %}
   auto_create_dataset: true
   auto_create_table: true
-  dataset: ljp_database
+  dataset: database
   table: $TABLENAME
   schema_file: /digdag/bigquery/embulk/db/$TABLENAME.json
   open_timeout_sec: 300
