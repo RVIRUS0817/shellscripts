@@ -68,7 +68,8 @@ scan(){
 
 
 report(){
-  vuls report -format-short-text -format-json -to-slack -cvss-over=7 -lang=ja
+  #vuls report -format-short-text -format-json -to-slack -cvss-over=7 -lang=ja
+  vuls report -format-one-line-text -format-json -to-slack -cvss-over=7 -lang=ja
 }
 
 
