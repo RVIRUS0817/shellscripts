@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [[ 'production' == $DIGDAG_ENV ]] ; then
+if [[ 'prd' == $DIGDAG_ENV ]] ; then
   body=$1
   room_id=$2
 
@@ -9,4 +9,4 @@ if [[ 'production' == $DIGDAG_ENV ]] ; then
   fi
 
   /usr/bin/curl -X POST -H "X-ChatWorkToken:xxxxxxxxxxxx" -d "body=$body" "https://api.chatwork.com/v2/rooms/$room_id/messages"
-fi<Paste>
+fi
