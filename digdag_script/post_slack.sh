@@ -3,7 +3,7 @@
 url='https://hooks.slack.com/services/xxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 username='DigDag'
 to="sre"
-subject=`FAILED`
+subject='FAILED'
 emoji=':digdag:'
 message="$1"
 color="#FF0000"
