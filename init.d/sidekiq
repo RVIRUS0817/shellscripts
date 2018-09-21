@@ -4,10 +4,10 @@
 
 NAME="sidekiq"
 
-ROOT_DIR="/var/www/trocco"
+ROOT_DIR="/var/www/sidekiq"
 
-PID="/var/www/trocco/tmp/pids/sidekiq.pid"
-CONF="/var/www/trocco/config/sidekiq.yml"
+PID="/var/www/sidekiq/tmp/pids/sidekiq.pid"
+CONF="/var/www/sidekiq/config/sidekiq.yml"
 CMD="/usr/local/rbenv/shims/bundle exec sidekiq -C ${CONF} -d"
 
 start()
