@@ -2,57 +2,57 @@
 # chkconfig: 2345 90 10
 # description: unicorn system status
 
-NAME="Unicorn"
-ENV="{{ unicorn_env }}"
+NAME="unicorn"
+ENV="production"
 
-ROOT_DIR="/var/www/unicorn"
+ROOT_DIR="/var/www/rails"
 
-PID="/var/www/unicorn/tmp/pids/unicorn.pid"
-CONF="/var/www/unicorn/config/unicorn.rb"
+PID="/var/www/rails/tmp/pids/unicorn.pid"
+CONF="/var/www/rails/config/unicorn.rb"
 CMD="/usr/local/rbenv/shims/bundle exec unicorn_rails -c ${CONF} -E ${ENV} -D"
 
 start()
 {
-  if [ -e $PID ]; then
-    echo "$NAME already started"
+  if [ -e ${PID} ]; then
+    echo "${NAME} already started"
     exit 1
   fi
-  echo "start $NAME"
-  cd $ROOT_DIR
-  $CMD
+  echo "start ${NAME}"
+  cd ${ROOT_DIR}
+  ${CMD}
 }
 
 stop()
 {
-  if [ ! -e $PID ]; then
-    echo "$NAME not started"
+  if [ ! -e ${PID} ]; then
+    echo "${NAME} not started"
     exit 1
   fi
-  echo "stop $NAME"
-  kill -QUIT `cat ${PID}`
-  rm -f $PID
+  echo "stop ${NAME}"
+  kill -QUIT $(cat ${PID})
+  rm -f ${PID}
 }
 
 force_stop()
 {
-  if [ ! -e $PID ]; then
-    echo "$NAME not started"
+  if [ ! -e ${PID} ]; then
+    echo "${NAME} not started"
     exit 1
   fi
-  echo "stop $NAME"
-  kill -INT `cat ${PID}`
-  rm -f $PID
+  echo "stop ${NAME}"
+  kill -INT $(cat ${PID})
+  rm -f ${PID}
 }
 
 reload()
 {
-  if [ ! -e $PID ]; then
-    echo "$NAME not started"
+  if [ ! -e ${PID} ]; then
+    echo "${NAME} not started"
     start
     exit 0
   fi
-  echo "reload $NAME"
-  kill -HUP `cat ${PID}`
+  echo "reload ${NAME}"
+  kill -HUP $(cat ${PID})
 }
 
 restart()
@@ -62,13 +62,12 @@ restart()
 }
 
 status() {
-  if pgrep -f unicorn > /dev/null
-    then
-    echo -n $"unicorn is running: "
+  if [ -e ${PID} ]
+  then
+    echo -n "${NAME} is running: "
   else
-    echo -n $"unicorn is not running: "
+    echo -n "${NAME} is not running: "
   fi
-  RETVAL=$?
   echo
 }
 
@@ -92,6 +91,6 @@ case "$1" in
     status
     ;;
   *)
-    echo "Syntax Error: release [start|stop|force-stop|reload|restart|status]"
+    echo "Usage: $0 {start|stop|force-stop|reload|restart|status}"
     ;;
 esac

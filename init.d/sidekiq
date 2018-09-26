@@ -12,46 +12,46 @@ CMD="/usr/local/rbenv/shims/bundle exec sidekiq -C ${CONF} -d"
 
 start()
 {
-  if [ -e $PID ]; then
-    echo "$NAME already started"
+  if [ -e ${PID} ]; then
+    echo "${NAME} already started"
     exit 1
   fi
-  echo "start $NAME"
-  cd $ROOT_DIR
+  echo "start ${NAME}"
+  cd ${ROOT_DIR}
   $CMD
 }
 
 stop()
 {
-  if [ ! -e $PID ]; then
-    echo "$NAME not started"
+  if [ ! -e ${PID} ]; then
+    echo "${NAME} not started"
     exit 1
   fi
-  echo "stop $NAME"
-  kill -QUIT `cat ${PID}`
-  rm -f $PID
+  echo "stop ${NAME}"
+  kill -QUIT $(cat ${PID})
+  rm -f ${PID}
 }
 
 force_stop()
 {
-  if [ ! -e $PID ]; then
-    echo "$NAME not started"
+  if [ ! -e ${PID} ]; then
+    echo "${NAME} not started"
     exit 1
   fi
-  echo "stop $NAME"
-  kill -INT `cat ${PID}`
-  rm -f $PID
+  echo "stop ${NAME}"
+  kill -INT $(cat ${PID})
+  rm -f ${PID}
 }
 
 reload()
 {
-  if [ ! -e $PID ]; then
-    echo "$NAME not started"
+  if [ ! -e ${PID} ]; then
+    echo "${NAME} not started"
     start
     exit 0
   fi
-  echo "reload $NAME"
-  kill -HUP `cat ${PID}`
+  echo "reload ${NAME}"
+  kill -HUP $(cat ${PID})
 }
 
 restart()
@@ -61,14 +61,13 @@ restart()
 }
 
 status() {
-        if pgrep -f sidekiq > /dev/null
-        then
-          echo -n $"sidekiq is running: "
-        else
-          echo -n $"sidekiq is not running: "
-        fi
-        RETVAL=$?
-        echo
+  if [ -e ${PID} ]
+  then
+    echo -n "${NAME} is running: "
+  else
+    echo -n "${NAME} is not running: "
+  fi
+  echo
 }
 
 case "$1" in
@@ -91,6 +90,6 @@ case "$1" in
     status
     ;;
   *)
-    echo "Syntax Error: release [start|stop|force-stop|reload|restart|status]"
+    echo "Usage: $0 {start|stop|force-stop|reload|restart|status}"
     ;;
 esac
