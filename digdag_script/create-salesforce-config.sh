@@ -94,7 +94,7 @@ while read row; do
   column2=$(echo ${row} |\
     gsed -E 's/(テキストエリア|テキスト|チェックボックス|選択リスト|電子メール|ルックアップ|電話|通貨|URL).*/String/g'|\
     gsed -E 's/(ID|自動採番|数値|数式).*/INT64/g'|\
-    gsed 's/日付.*/Timestamp/g'|\
+    gsed -E 's/日付.*/Timestamp/g'|\
     cut -d , -f 2)
   echo  "    {
         \"name\": \"${column1}\",
