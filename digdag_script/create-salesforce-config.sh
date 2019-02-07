@@ -43,7 +43,7 @@ in:
   userName: {{ env.SALESFORCE_USER }}
   password: {{ env.SALESFORCE_PASS }}
   authEndpointUrl: {{ env.SALESFORCE_URL }}
-  objectType: Account
+  objectType: ${TABLENAME}
   pollingIntervalMillisecond: 5000
   querySelectFrom: |
     SELECT
