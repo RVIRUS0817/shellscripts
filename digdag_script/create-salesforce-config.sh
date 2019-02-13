@@ -89,20 +89,21 @@ out:
 echo ${TABLENAME}.yml.liquid done!
 
 ## csvの型をjsonファイルに自動追記 ###
-while read row; do
+  while read row; do
   column1=$(echo ${row} | cut -d , -f 1)
-  column2=$(echo ${row} |\
-    gsed -E 's/(数値|パーセント|テキストエリア|テキスト|テキスト\（ユニーク 大文字と小文字を区別しない\）|選択リスト|選択リスト\(複数 選択\)|電子メール|ルックアップ|電話|URL|数式\（テキスト\）|数式\（数値\）|数式\（通貨\）|数式\（パーセント\）).*/STRING/g'|\
-    gsed -E 's/(チェックボックス).*/BOOL/g'|\
-    gsed -E 's/(数式\（日付\/時間\）|日付\/時間).*/TIMESTAMP/g'|\
-    gsed -E 's/(通貨).*/FLOAT64/g'|\
-    gsed -E 's/(日付|数式\（日付\）).*/DATE/g'|\
-    gsed -E 's/(自動採番|数式).*/INT64/g'|\
-    cut -d , -f 2)
+  column2=$(echo ${row} | cut -d , -f 2)
+    
+//g') lumn2=$(echo ${column2} | gsed -E 's/
+
+    if [ "$column2" = "自動採番" ]; then
+      column2=$(echo "INT64")
+    elif [ "$column2" = "数値" -o "$column2" = "通貨" -o "$column2" = "数式（数値）" -o "$column2" = "数式（通貨）" -o "$column2" = "数式（パーセント）" ]; then
+    fi
+
   echo  "    {
         \"name\": \"${column1}\",
         \"type\": \"${column2}\"
-    }, "
+    }, "<Paste>
 
 done < ${CSV} > ${FILEPATH}/embulk/db/${TABLENAME}.json
 
