@@ -89,25 +89,35 @@ out:
 echo ${TABLENAME}.yml.liquid done!
 
 ## csvの型をjsonファイルに自動追記 ###
-  while read row; do
+while read row; do
   column1=$(echo ${row} | cut -d , -f 1)
   column2=$(echo ${row} | cut -d , -f 2)
-    
-//g') lumn2=$(echo ${column2} | gsed -E 's/
+    column2=$(echo ${column2} | gsed -E 's/
+//g') 
 
     if [ "$column2" = "自動採番" ]; then
       column2=$(echo "INT64")
     elif [ "$column2" = "数値" -o "$column2" = "通貨" -o "$column2" = "数式（数値）" -o "$column2" = "数式（通貨）" -o "$column2" = "数式（パーセント）" ]; then
+      column2=$(echo "FLOAT64")      
+    elif [ "$column2" = "日付/時間" ]; then
+      column2=$(echo "TIMESTAMP")    
+    elif [ "$column2" = "日付" ]; then
+      column2=$(echo "DATE")
+    elif [ "$column2" = "チェックボックス" ]; then
+      column2=$(echo "BOOL")
+    else  
+      column2=$(echo "STRING")
     fi
 
   echo  "    {
         \"name\": \"${column1}\",
         \"type\": \"${column2}\"
-    }, "<Paste>
-
+    }, "
+      
 done < ${CSV} > ${FILEPATH}/embulk/db/${TABLENAME}.json
 
 gsed -i -e '1i [' -e '$a ]' ${FILEPATH}/embulk/db/${TABLENAME}.json
+
 
 ### jsonは末尾に,が使えず、embulkでjsonのparseエラーになってしまうので削除する ###
 [ -f tmp.json ] && rm -f tmp.json
