@@ -34,7 +34,7 @@ EOD
 echo ${TABLENAME}.dig done!
 
 # add run.dig
-echo -e "\n+$TABLENAME:\n call>: $TABLENAME.dig" >> $FILEPATH/run.dig
+echo -e "\n+$TABLENAME:\n  _retry: 3\n  call>: $TABLENAME.dig" >> $FILEPATH/run.dig
 
 ### embulkファイルの作成 ###
 cat << EOD > ${FILEPATH}/embulk/${TABLENAME}.yml.liquid
