@@ -66,6 +66,11 @@ s3ServerSideEncryption = "AES256"
 
 [servers]
 
+[servers.xxxxx]
+host    = "localhost"
+port    = "local"
+scanMode = ["fast"]
+
 _EOT_
 
 describe_instances $AWS_PROFILE
