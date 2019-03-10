@@ -30,6 +30,14 @@ docker run --rm -it \
     -v $PWD/go-cve-dictionary-log:/var/log/vuls \
     vuls/goval-dictionary fetch-redhat 5 6 7
 
+#gost
+echo -n $"gost: "
+
+docker run --rm -i \
+    -v $PWD:/vuls \
+    -v $PWD/goval-log:/var/log/gost \
+    vuls/gost fetch redhat --after=2016-01-01
+
 #vuls scan
 echo -n $"vuls scan: "
 
