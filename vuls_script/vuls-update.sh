@@ -20,7 +20,7 @@ vuls -v
 ## Update go-cve-dictionary
 
 echo -e "\n----Update go-cve-dictionary----"
-cd $GOCVEDICTIONARY && git pull > /dev/null 2>&1 && rm -rf vendor && rm -rf $GOPATH/pkg && make install > /dev/null 2>&1
+cd $GOCVEDICTIONARY && git pull > /dev/null 2>&1 && sudo rm -rf vendor && sudo rm -rf $GOPATH/pkg && make install > /dev/null 2>&1
 
 if [ $? = 0 ]; then
   echo "Update OK"
@@ -31,7 +31,7 @@ fi
 ## Update goval-dictionary
 
 echo -e "\n----Update goval-dictionary----"
-cd $GOVALDICTIONARY && git pull  > /dev/null 2>&1  && rm -rf vendor && rm -rf $GOPATH/pkg && make install > /dev/null 2>&1
+cd $GOVALDICTIONARY && git pull  > /dev/null 2>&1  && sudo rm -rf vendor && sudo rm -rf $GOPATH/pkg && make install > /dev/null 2>&1
 
 if [ $? = 0 ]; then
   echo "Update OK"
@@ -42,7 +42,7 @@ fi
 ## Update gost
 
 echo -e "\n----Update gost----"
-cd $GOST && git pull  > /dev/null 2>&1  && rm -rf vendor && rm -rf $GOPATH/pkg && make install > /dev/null 2>&1
+cd $GOST && git pull  > /dev/null 2>&1  && sudo rm -rf vendor && sudo rm -rf $GOPATH/pkg && make install > /dev/null 2>&1
 
 if [ $? = 0 ]; then
   echo "Update OK"
@@ -53,7 +53,7 @@ fi
 ## Update go-exploitdb
 
 echo -e "\n----Update go-exploitdb----"
-cd $GOEXPLOITDB && git pull  > /dev/null 2>&1  && rm -rf vendor && rm -rf $GOPATH/pkg && make install > /dev/null 2>&1
+cd $GOEXPLOITDB && git pull  > /dev/null 2>&1  && sudo rm -rf vendor && sudo rm -rf $GOPATH/pkg && make install > /dev/null 2>&1
 
 if [ $? = 0 ]; then
   echo "Update OK"
@@ -65,7 +65,7 @@ fi
 ## Update Vuls
 
 echo -e "\n----Update Vuls----"
-cd $VULS && git pull  > /dev/null 2>&1 && rm -rf vendor && rm -rf $GOPATH/pkg && make install > /dev/null 2>&1
+cd $VULS && git pull  > /dev/null 2>&1 && sudo rm -rf vendor && sudo rm -rf $GOPATH/pkg && make install > /dev/null 2>&1
 
 if [ $? = 0 ]; then
   echo "Update OK"
