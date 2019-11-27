@@ -4,7 +4,7 @@ $(".common/secrets.sh")
 YESTERDAY=$(date +%Y-%m-%d -d '1 days ago')
 
 ## views out csv
-bq query --use_legacy_sql=false --format=csv --max_rows=100000 "SELECT * FROM \`prd-adachin.views.views\` where dt=\"${YESTERDAY}\"" > /tmp/views.csv
+/home/adachin/google-cloud-sdk/bin/bqbq query --use_legacy_sql=false --format=csv --max_rows=100000 "SELECT * FROM \`prd-adachin.views.views\` where dt=\"${YESTERDAY}\"" > /tmp/views.csv
 
 ## add ,
 sed -i '1,2d' /tmp/views.csv
