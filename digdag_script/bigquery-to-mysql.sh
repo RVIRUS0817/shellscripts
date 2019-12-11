@@ -11,7 +11,7 @@ sed -i '1,2d' /tmp/views.csv
 sed -i "s/^/,/g" /tmp/views.csv
 
 # restore
-mysql -h "${HOST}" -u lancers -p"${PWD}" -P "${PORT}" adachin -N -e "LOAD DATA LOCAL INFILE '/tmp/views.csv' INTO TABLE views FIELDS TERMINATED BY ','"
+mysql -h "${HOST}" -u adachin -p"${PWD}" -P "${PORT}" adachin -N -e "LOAD DATA LOCAL INFILE '/tmp/views.csv' INTO TABLE views FIELDS TERMINATED BY ','"
 
 ## rm profile_views.
 rm -f /tmp/views.csv
