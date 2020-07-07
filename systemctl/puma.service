@@ -1,0 +1,22 @@
+# /usr/lib/systemd/system/puma.service
+
+[Unit]
+Description=Puma Application Server
+After=network.target
+[Service]
+User=adachin
+WorkingDirectory=/var/www/app
+Environment="RAILS_ENV=production"
+SyslogIdentifier=unicorn
+PIDFile=/var/www/app/tmp/pids/unicorn.pid
+ExecStart=/home/adachin/.rbenv/shims/bundle exec /home/adachin/.rbenv/shims/pumactl start"
+ExecStop=/usr/bin/kill -QUIT $MAINPID
+ExecReload=/bin/kill -USR2 $MAINPID
+[Install]
+WantedBy=multi-user.target
+
+# chmod +x /etc/systemd/system/puma.service
+# systemctl daemon-reload
+# systemctl enable puma
+# systemctl start puma
+# systemctl stop puma

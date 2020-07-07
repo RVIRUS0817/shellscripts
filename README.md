@@ -5,6 +5,8 @@
 https://gist.github.com/RVIRUS0817  
 manage gist as well   
 
+## aws
+
 ## backup_script  
 
 Mysql,etc...   
@@ -30,6 +32,10 @@ https://blog.adachin.me/archives/8334
 ## init.d  
 
 sysvinit scripts  
+
+## systemctl 
+
+systemd scripts  
 
 ## vuls_script  
 

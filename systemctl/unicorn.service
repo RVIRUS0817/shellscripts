@@ -1,0 +1,23 @@
+#  /usr/lib/systemd/system/unicorn.service
+
+[Unit]
+Description=Unicorn Server
+After=mysqld.service
+[Service]
+User=adachin
+WorkingDirectory=/var/www/app
+Environment=RAILS_ENV=production
+SyslogIdentifier=unicorn
+PIDFile=/var/www/app/tmp/pids/unicorn.pid
+ExecStart=/home/adachin/.rbenv/shims/bundle exec unicorn_rails -c /var/www/app/config/unicorn.conf.rb
+ExecStop=/usr/bin/kill -QUIT $MAINPID
+ExecReload=/bin/kill -USR2 $MAINPID
+[Install]
+WantedBy=multi-user.target
+
+# chmod +x /etc/systemd/system/unicorn.service
+# systemctl daemon-reload
+# systemctl enable unicorn
+# systemctl start unicorn
+# systemctl stop unicorn
+# systemctl restart unicorn
