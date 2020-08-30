@@ -6,7 +6,7 @@ DIR=~/vagrant/stg
 help() {
 echo "
   下記のようにstatusを指定して実行しろや！！
-  (例) ./vagrant.sh status,up,suspend
+  (例) ./deploy-vagrant.sh status,up,suspend
     "
 }
 
