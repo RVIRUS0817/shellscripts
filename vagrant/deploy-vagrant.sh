@@ -1,7 +1,7 @@
 #!/bin/bash
 
 STATUSNAME=$1
-DIR=~/vagrant/stg
+DIR=~/vagrant/dev
 
 help() {
 echo "
